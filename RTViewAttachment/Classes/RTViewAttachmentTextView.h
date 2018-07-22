@@ -8,15 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
-@class RTViewAttachment;
 @class RTViewAttachmentTextView;
 
 @protocol RTViewAttachmentTextViewDelegate <NSObject>
 @optional
-- (BOOL)attachmentTextView:(RTViewAttachmentTextView *)attachmentTextView shouldDeleteAttachments:(NSArray <RTViewAttachment *> *)attachments;
 
-- (void)attachmentTextView:(RTViewAttachmentTextView *)attachmentTextView willDeleteAttachment:(RTViewAttachment *)attachment;
-- (void)attachmentTextView:(RTViewAttachmentTextView *)attachmentTextView didDeleteAttachment:(RTViewAttachment *)attachment;
+- (void)textDidBeginEditing:(RTViewAttachmentTextView *)attachmentTextView;
+- (void)textDidEndEditing:(RTViewAttachmentTextView *)attachmentTextView;
+
+- (void)textDidChangeIn:(RTViewAttachmentTextView *)attachmentTextView;
+
+- (BOOL)attachmentTextView:(RTViewAttachmentTextView *)attachmentTextView shouldDeleteAttachments:(NSArray<NSTextAttachment *> *)attachments;
+
+- (void)attachmentTextView:(RTViewAttachmentTextView *)attachmentTextView willDeleteAttachment:(NSTextAttachment *)attachment;
+- (void)attachmentTextView:(RTViewAttachmentTextView *)attachmentTextView didDeleteAttachment:(NSTextAttachment *)attachment;
 
 @end
 
@@ -28,12 +33,12 @@ IB_DESIGNABLE
 
 @property (nonatomic, strong) NSParagraphStyle *paragraphStyle;
 @property (nonatomic, strong) IBInspectable UIFont *font;
+@property (nonatomic, strong) IBInspectable UIColor *textColor;
 @property (nonatomic, assign) IBInspectable UIEdgeInsets textContainerInset;
 
 @property (nonatomic, weak) IBOutlet id<RTViewAttachmentTextViewDelegate> delegate;
 
-- (void)insertViewAttachment:(RTViewAttachment *)attachment;
-- (void)insertViewAttachment:(RTViewAttachment *)attachment atIndex:(NSUInteger)index;
-- (void)removeViewAttachment:(RTViewAttachment *)attachment;
+- (void)insertViewAttachment:(NSTextAttachment *)attachment;
+- (void)removeViewAttachment:(NSTextAttachment *)attachment;
 
 @end

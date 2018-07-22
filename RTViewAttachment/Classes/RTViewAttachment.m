@@ -49,7 +49,7 @@
 {
     if (_attachedView != attachedView) {
         _attachedView = attachedView;
-        self.bounds = _attachedView.bounds;
+        self.bounds = attachedView.bounds;
     }
 }
 

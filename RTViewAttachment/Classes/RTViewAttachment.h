@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface RTViewAttachment : NSTextAttachment
 
 /**
@@ -18,22 +20,26 @@
 /**
  *  This is the text that will be outputed when use copy from text editor
  */
-@property (nonatomic, copy) NSString *placeholderText;
+@property (nonatomic, copy, nullable) NSString *placeholderText;
 
 /**
  *  If this property is set to `YES`, the attachedView.bounds.size.width will be the text editor's edit area width
  */
 @property (nonatomic, assign, getter=isFullWidth) BOOL fullWidth;
 
-@property (nonatomic, strong) id userInfo;
+@property (nonatomic, strong, nullable) id userInfo;
 @property (nonatomic, assign) NSInteger tag;
 
 
-- (instancetype)initWithView:(UIView *)view;
-- (instancetype)initWithView:(UIView *)view
-             placeholderText:(NSString *)text;
-- (instancetype)initWithView:(UIView *)view
-             placeholderText:(NSString *)text
-                   fullWidth:(BOOL)fullWidth;
+- (instancetype)initWithView:(UIView *_Nullable)view;
+- (instancetype)initWithView:(UIView *_Nullable)view
+             placeholderText:(NSString * _Nullable)text;
+- (instancetype)initWithView:(UIView *_Nullable)view
+             placeholderText:(NSString * _Nullable)text
+                   fullWidth:(BOOL)fullWidth NS_DESIGNATED_INITIALIZER;
+
+- (void)performInteration:(UITextItemInteraction)interation;
 
 @end
+
+NS_ASSUME_NONNULL_END
